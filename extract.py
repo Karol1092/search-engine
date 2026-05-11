@@ -9,6 +9,9 @@ def main():
     results = []
 
     for i, page in enumerate(dump):
+        if i % 10000 == 0:
+            print(f"step {i}")
+            
         if page.namespace != 0:
             continue
         
@@ -26,10 +29,6 @@ def main():
             text = post_process(text)   
             
             results.append((title, text, url))
-            
-
-        if i % 10000 == 0:
-            print(f"step {i}")
             
     print(f"Number of articles: {len(results)}")
     
