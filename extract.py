@@ -27,6 +27,9 @@ def main():
             text = clear_wikitext(last_revision.text)
             text = remove_wiki_markers(text)
             text = post_process(text)   
+
+            if len(text) < 150:
+                continue
             
             results.append((title, text, url))
             
