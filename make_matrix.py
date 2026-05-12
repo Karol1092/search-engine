@@ -1,6 +1,7 @@
-import numpy as np
+import json
 import sqlite3
 import re
+import numpy as np
 from nltk.stem import PorterStemmer
 from scipy.sparse import save_npz
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -10,13 +11,15 @@ def main():
     vectorizer = TfidfVectorizer(
         min_df=5,
         stop_words="english",
+        dtype=np.float32
     )
     
     tfidf = vectorizer.fit_transform(doc_generator("articles.db"))
-    A = vectorizer.get_feature_names_out()
+    A = vectorizer.vocabulary_
     print(f"Vocabulary size: {len(A)}")
     
     save_npz("tfidf.npz", tfidf)
+    json.dump(A, open("vocab.json", "w"))
 
 
 def doc_generator(db_path):
