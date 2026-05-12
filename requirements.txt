@@ -15,5 +15,8 @@ para==0.0.8
 referencing==0.37.0
 regex==2026.5.9
 rpds-py==0.30.0
+scikit-learn==1.8.0
+scipy==1.17.1
+threadpoolctl==3.6.0
 tqdm==4.67.3
 typing_extensions==4.15.0
