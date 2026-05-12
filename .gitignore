@@ -2,4 +2,5 @@
 articles.db
 simplewiki-latest-pages-articles.xml
 *.npz
+*.pkl
 __pycache__/
