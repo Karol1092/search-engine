@@ -1,4 +1,4 @@
-import json
+import joblib
 import sqlite3
 import re
 import numpy as np
@@ -9,26 +9,18 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 def main():
     tfidf = load_npz("tfidf.npz")
+    vectorizer = joblib.load("tfidf-vectorizer.pkl")
 
     stemmer = PorterStemmer()
-
     text = input()
+    processed_text = stem(text, stemmer)
     
-    processed_text = [stem(text, stemmer)]
-    
-    with open("vocab.json", "r", encoding="utf-8") as f:
-        vocab = json.load(f)
-        
-    print(type(vocab))
-    
-    vectorizer = TfidfVectorizer(
-        min_df=5,
-        stop_words="english",
-        dtype=np.float32,
-    )
+    print(processed_text)
     
     
-
+    q = vectorizer.transform([processed_text])
+    
+    print(q)
     
 
 if __name__ == "__main__":

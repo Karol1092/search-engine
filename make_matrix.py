@@ -1,4 +1,4 @@
-import json
+import joblib
 import sqlite3
 import re
 import numpy as np
@@ -19,7 +19,7 @@ def main():
     print(f"Vocabulary size: {len(A)}")
     
     save_npz("tfidf.npz", tfidf)
-    json.dump(A, open("vocab.json", "w"))
+    joblib.dump(vectorizer, "tfidf-vectorizer.pkl")
 
 
 def doc_generator(db_path):
