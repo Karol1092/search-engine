@@ -2,4 +2,4 @@
 articles.db
 simplewiki-latest-pages-articles.xml
 *.npz
-*.json
+__pycache__/
