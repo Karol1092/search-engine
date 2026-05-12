@@ -30,7 +30,7 @@ def main():
             doc_title, doc_url = get_doc_title_url(str(idx + 1))
             print(doc_title.replace("_", " "))
             print(doc_url)
-            print(scores[idx], "\n")
+            print(f"{(scores[idx] * 100):.1f}%", "\n")
             
         print("\n")
     
