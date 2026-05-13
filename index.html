@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Search</title>
+    </head>
+
+    <body>
+        <h1>Search</h1>
+ 
+        <input id="input" placeholder="search">
+        <button onclick="searchResults()">Search</button>
+
+        <hr>
+
+        <ul id="results"></ul>
+
+    </body>
+    
+
+    <script>
+        const API = "http://127.0.0.1:8000";
+
+        async function searchResults() {
+            const inputText = document.getElementById("input").value;
+
+            const res = await fetch(`${API}/search`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: inputText })
+            });
+
+            const data = await res.json();
+
+            const list = document.getElementById("results");
+            list.innerHTML = "";
+
+            data.results.forEach(result => {
+                const li = document.createElement("li");
+
+                li.innerHTML = `
+                    <b>${result.title}</b><br>
+                    <a href="${result.url}" target="_blank">${result.url}</a><br>
+                    ${result.score}%<br><br>
+                `;
+
+                list.append(li);
+            });
+        }
+
+    </script>
+
+</html>

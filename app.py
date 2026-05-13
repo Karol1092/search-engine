@@ -1,23 +1,36 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from search_engine import SearchEngine
 from db import get_docs_by_id
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 search_engine = SearchEngine(
     "tfidf.npz", 
     "tfidf-vectorizer.pkl", 
-    k=10
+    k=50
 )
 
-final_results = []
+class SearchRequest(BaseModel):
+    text: str
 
 @app.post("/search")
-async def search(q: str):
-    results = search_engine.search(q)
+async def search(q: SearchRequest):
+    results = search_engine.search(q.text)
 
     ids = [r["doc_id"] for r in results]
     docs = get_docs_by_id(ids)
+    
+    final_results = []
 
     for r in results:
         doc = docs.get(r["doc_id"])
@@ -30,16 +43,6 @@ async def search(q: str):
             })
             
     return {
-        "query": q,
-        "result": final_results
+        "query": q.text,
+        "results": final_results
     }
-    
-@app.get("/search")
-async def get_results():
-    return final_results
-
-    
-@app.delete("/search")
-async def reset_results():
-    final_results.clear()
-    return {"message": "results cleared"}
