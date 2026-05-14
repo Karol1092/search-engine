@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from search_engine import SearchEngine
+from search_engine import SearchEngine, TfidfBackend, LsaBackend
 from db import get_docs_by_id
 
 app = FastAPI()
@@ -14,9 +14,14 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+backends = {
+    "tfidf": TfidfBackend(),
+    "lsa": LsaBackend()
+}
+
 search_engine = SearchEngine(
-    "tfidf.npz", 
-    "tfidf-vectorizer.pkl", 
+    backends,
+    default="tfidf",
     k=50
 )
 
