@@ -7,19 +7,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 class SearchEngine:
-    def __init__(self, backends, default="tfidf", k=10):
+    def __init__(self, backends, k=10):
         self.backends = backends
-        self.current = default
         self.k = k
         
-    def set_backend(self, name):
-        if name not in self.backends:
-            raise ValueError(f"Unknown backend: {name}")
-        
-        self.current = name
-        
-    def search(self, text):
-        backend = self.backends[self.current]
+    def search(self, text, backend):
+        backend = self.backends[backend]
         
         top, scores = backend.search(text, self.k)
         

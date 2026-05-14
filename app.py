@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import Literal
 from search_engine import SearchEngine, TfidfBackend, LsaBackend
 from db import get_docs_by_id
 
@@ -21,16 +22,16 @@ backends = {
 
 search_engine = SearchEngine(
     backends,
-    default="tfidf",
     k=50
 )
 
 class SearchRequest(BaseModel):
     text: str
+    backend: Literal["tfidf", "lsa"] = "tfidf"
 
 @app.post("/search")
 async def search(q: SearchRequest):
-    results = search_engine.search(q.text)
+    results = search_engine.search(q.text, q.backend)
 
     ids = [r["doc_id"] for r in results]
     docs = get_docs_by_id(ids)
