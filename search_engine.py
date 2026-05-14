@@ -54,28 +54,4 @@ class LsaBackend:
         top = np.argsort(scores)[-k:][::-1]
         
         return top, scores
-        
-        
-
-# class SearchEngine:
-#     def __init__(self, tfidf_path, vectorizer_path, k=10):
-#         self.tfidf = load_npz(tfidf_path)
-#         self.vectorizer = joblib.load(vectorizer_path)
-#         self.stemmer = PorterStemmer()
-#         self.k = k
-
-#     def search(self, text):
-#         processed_text = stem(text, self.stemmer)
-#         q = self.vectorizer.transform([processed_text])
-        
-#         scores = cosine_similarity(q, self.tfidf)[0]
-#         top_indices = np.argsort(scores)[-self.k:][::-1]
-        
-#         results = []
-#         for idx in top_indices:
-#             results.append({
-#                 "doc_id": int(idx + 1),
-#                 "score": float(scores[idx])
-#             })
-            
-#         return results
+    
