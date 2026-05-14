@@ -2,14 +2,24 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
         <title>Search</title>
     </head>
 
     <body>
-        <h1>Search</h1>
- 
-        <input id="input" placeholder="search">
-        <button onclick="searchResults()">Search</button>
+        <h1 class="logo">
+            <span class="blue">S</span>
+            <span class="red">e</span>
+            <span class="yellow">a</span>
+            <span class="blue">r</span>
+            <span class="green">c</span>
+            <span class="red">h</span>
+        </h1>
+        
+        <div class="search-box">
+            <input id="input" placeholder="search">
+            <button onclick="searchResults()">Search</button>
+        </div>
 
         <hr>
 
@@ -38,10 +48,18 @@
             data.results.forEach(result => {
                 const li = document.createElement("li");
 
+                let scoreClass = "";
+
+                if (result.score >= 70) scoreClass = "good";
+                else if (result.score >= 40) scoreClass = "medium";
+                else scoreClass = "bad";
+
                 li.innerHTML = `
-                    <b>${result.title}</b><br>
-                    <a href="${result.url}" target="_blank">${result.url}</a><br>
-                    ${result.score}%<br><br>
+                    <div class="results">
+                        <p class="title">${result.title}</p>
+                        <a class="link" href="${result.url}" target="_blank">${result.url}</a>
+                        <p class="score ${scoreClass}" >${result.score}%</p>
+                    </div>
                 `;
 
                 list.append(li);
