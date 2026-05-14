@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Literal
-from search_engine import SearchEngine, TfidfBackend, LsaBackend
-from db import get_docs_by_id
+from app.search_engine import SearchEngine, TfidfBackend, LsaBackend
+from scripts.db import get_docs_by_id
 
 app = FastAPI()
 

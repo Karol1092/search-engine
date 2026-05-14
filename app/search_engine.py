@@ -2,7 +2,7 @@ import joblib
 import numpy as np
 from nltk.stem import PorterStemmer
 from scipy.sparse import load_npz
-from make_matrix import stem
+from scripts.make_matrix import stem
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -26,7 +26,7 @@ class SearchEngine:
         return results
     
 class TfidfBackend:
-    def __init__(self, tfidf_path="tfidf.npz", vectorizer_path="tfidf-vectorizer.pkl"):
+    def __init__(self, tfidf_path="models/tfidf.npz", vectorizer_path="models/tfidf-vectorizer.pkl"):
         self.tfidf = load_npz(tfidf_path)
         self.vectorizer = joblib.load(vectorizer_path)
         
@@ -40,7 +40,7 @@ class TfidfBackend:
         return top, scores
     
 class LsaBackend:
-    def __init__(self, lsa_path="lsa.npz", svd_path="svd_model.pkl", vectorizer_path="tfidf-vectorizer.pkl"):
+    def __init__(self, lsa_path="models/lsa.npz", svd_path="models/svd_model.pkl", vectorizer_path="models/tfidf-vectorizer.pkl"):
         self.lsa = load_npz(lsa_path)
         self.svd = joblib.load(svd_path)
         self.vectorizer = joblib.load(vectorizer_path)

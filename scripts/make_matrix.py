@@ -14,12 +14,12 @@ def main():
         dtype=np.float32
     )
     
-    tfidf = vectorizer.fit_transform(doc_generator("articles.db"))
+    tfidf = vectorizer.fit_transform(doc_generator("data/articles.db"))
     A = vectorizer.vocabulary_
     print(f"Vocabulary size: {len(A)}")
     
-    save_npz("tfidf.npz", tfidf)
-    joblib.dump(vectorizer, "tfidf-vectorizer.pkl")
+    save_npz("models/tfidf.npz", tfidf)
+    joblib.dump(vectorizer, "models/tfidf-vectorizer.pkl")
 
 
 def doc_generator(db_path):

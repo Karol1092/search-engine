@@ -4,7 +4,7 @@ import re
 import sqlite3
 
 def main():
-    dump = mwxml.Dump.from_file(open("simplewiki-latest-pages-articles.xml", "r", encoding="utf-8"))
+    dump = mwxml.Dump.from_file(open("data/simplewiki-latest-pages-articles.xml", "r", encoding="utf-8"))
 
     results = []
 
@@ -70,7 +70,7 @@ def make_url(title):
     return "https://simple.wikipedia.org/wiki/" + title
 
 def create_and_write_to_db(to_insert):
-    conn = sqlite3.connect("articles.db")
+    conn = sqlite3.connect("data/articles.db")
     cursor = conn.cursor()
     
     cursor.execute(

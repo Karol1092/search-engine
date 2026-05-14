@@ -1,7 +1,7 @@
 import sqlite3
 
 def get_docs_by_id(ids):
-    conn = sqlite3.connect("articles.db")
+    conn = sqlite3.connect("data/articles.db")
     cur = conn.cursor()
     
     placeholders = ",".join(["?"] * len(ids))
