@@ -4,7 +4,7 @@ import re
 import sqlite3
 
 def main():
-    dump = mwxml.Dump.from_file(open("data/simplewiki-latest-pages-articles.xml", "r", encoding="utf-8"))
+    dump = mwxml.Dump.from_file(open("data/wiki.xml", "r", encoding="utf-8"))
 
     results = []
 

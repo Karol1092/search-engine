@@ -1,6 +1,7 @@
 .venv
 articles.db
-simplewiki-latest-pages-articles.xml
+*.xml
+*.bz2
 *.npz
 *.pkl
 __pycache__/
