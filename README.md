@@ -35,6 +35,7 @@ python3 build.py
 ```bash
 ./start.sh
 ```
+Open http://localhost:5500/ in your browser.
 
 
 
