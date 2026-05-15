@@ -61,7 +61,7 @@ Words than appeared in less than 5 documents were removed.
 ### Implementation
 Wikipedia dump is parsed with: 
 - mwxml (https://pypi.org/project/mwxml/)
-- mwparserfromhell https://pypi.org/project/mwparserfromhell/0.3/) 
+- mwparserfromhell (https://pypi.org/project/mwparserfromhell/0.3/) 
   
 TF-IDF was implemented with `TfidfVectorizer` from `sklearn.feature_extraction.text`. 
 
