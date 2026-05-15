@@ -1,5 +1,5 @@
 # search-engine
-A search engine for simple english Wikipedia articles using Term Frequency-Inverse Document Frequency (TF-IDF) and Latent Semantic Analysis (LSA) using Singular Value Decomposition (SVD).
+A search engine for simple english Wikipedia articles using Term Frequency-Inverse Document Frequency (TF-IDF) and Latent Semantic Analysis (LSA) with Singular Value Decomposition (SVD).
 
 ## Installation
 **Prerequisites:**
@@ -37,6 +37,25 @@ python3 build.py
 ```
 Open http://localhost:5500/ in your browser.
 
+You can choose plain TF-IDF or TF-IDF + LSA.
+
+**Example:**
+![example](img/demo.png)
+
+## Details
+
+### Articles
+Number of articles: ~250k. \
+Articles with less than 150 letters were removed.
+
+### Vocabulary
+Number of terms in vocabulary: ~140k. \
+Words than appeared in less than 5 documents were removed.
+
+### Implementation
+TF-IDF was implemented with `TfidfVectorizer` from `sklearn.feature_extraction.text`. \
+SVD for LSA was implemented with `TruncatedSVD` from `sklearn.decompostion`. \
+Matrices are stored as `csr_matrix` from `scipy.sparse` because of their sizes.
 
 
 
